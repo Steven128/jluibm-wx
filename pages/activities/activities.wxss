@@ -1,0 +1,69 @@
+view {
+  background-color: #fff;
+}
+
+page {
+  width: 100%;
+  height: 100%;
+  background-color: #efefef;
+}
+
+.container {
+  padding: 0;
+  display: block;
+}
+
+#title {
+  color: #fff;
+  background-image: url("http://www.jluibm.cn/src/wx/login-bg.png");
+  background-size: cover;
+  font-size: 20px;
+  padding: 50rpx;
+}
+
+.map-title {
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+.map-title view {
+  font-size: 18px;
+  margin: 20rpx auto 20rpx 50rpx;
+}
+
+.map {
+  background-color: #efefef;
+  width: 100%;
+  height: 600rpx;
+}
+
+.main-content {
+  width: 100%;
+  background-color: #efefef;
+}
+
+.map_text {
+  background-color: #efefef;
+  margin-left: 50rpx;
+}
+
+.locationName {
+  background-color: #efefef;
+  margin: 10rpx auto;
+  font-size: 16px;
+}
+
+.locationDesc {
+  background-color: #efefef;
+  margin: 10rpx auto;
+  font-size: 14px;
+}
+
+.sign {
+  height: 85rpx;
+  font-size: 16px;
+  margin-top: 20rpx;
+  background-color: #0067b8;
+  color: #efefef;
+}

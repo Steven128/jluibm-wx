@@ -1,0 +1,55 @@
+<view class="container">
+  <view class='head-content'>
+    <view class='title'>个人信息</view>
+    <view class="{{showWeather?'weather-show':'weather-hide'}}">
+      <view class='weather-title'>{{weather.city}}</view>
+      <view class='weather-temp'>{{weather.weather}} {{weather.temperature}}℃</view>
+      <view class='weather-wind'>{{weather.winddirection+"风"}} {{weather.windpower-3+"级"}}</view>
+    </view>
+  </view>
+  <view class='main-content'>
+    <view class='main-box'>
+      <view class="{{showInfo?'user-online-show':'user-online-hide'}}">
+        <view class='user-pic'>
+          <view class='userPic-wrap'>
+            <image class='user' src="{{userPicPath}}"></image>
+          </view>
+        </view>
+        <view class='user-welcome'>你好，{{name}}</view>
+        <button class='logout' bindtap='logout'>退出登录</button>
+      </view>
+      <view class="{{showInfo?'user-offline-hide':'user-offline-show'}}">
+        <view>
+          <view class='user-pic'>
+            <view class='userPic-wrap'>
+              <image class='user' src="{{userPicPath}}"></image>
+            </view>
+          </view>
+          <button class='login' bindtap='userLogin'>登录</button>
+        </view>
+      </view>
+      <view class="{{showInfo?'user-info-show':'user-info-hide'}}">
+        <view class='info-box'>
+          <view class='info-title'>我的基本信息</view>
+          <view class='info'>学号：{{number}}</view>
+          <view class='info'>学院：{{college}}</view>
+          <view class='info'>专业：{{major}}</view>
+          <view class='info'>性别：{{gender}}</view>
+          <view class='info'>年级：{{grade}}</view>
+        </view>
+      </view>
+      <view class="{{showWait||showInfo?'tourist-info-hide':'tourist-info-show'}}">
+        <view class='info-box'>
+          <view class='info-title'>我的基本信息</view>
+          <view class='info info-offline'>这里空空如也，什么都没有</view>
+          <view class='info info-offline'>还不是社员？欢迎加入我们</view>
+        </view>
+      </view>
+      <view class="{{showWait?'waiting-show':'waiting-hide'}}">
+        <view class='info-box'>
+          <view class='info'>正在获取信息，请稍后...</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

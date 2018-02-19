@@ -1,0 +1,14 @@
+.content {
+  background-color: #f5f5f5;
+  color: #000;
+
+}
+.emptyBlock {
+  padding-top: 200rpx;
+}
+.text {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 20rpx;
+  height: 500rpx;
+}

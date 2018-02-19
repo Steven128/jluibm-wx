@@ -1,0 +1,44 @@
+{
+    "pages": [
+        "pages/password/password",
+        "pages/index/index",
+        "pages/activities/activities",
+        "pages/join/join",
+        "pages/link/link",
+        "pages/signin/signin",
+        "pages/registered/registered",
+        "pages/upload/upload"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "white",
+        "navigationBarTitleText": "IBMclub 报名&签到",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#a9b7b7",
+        "background-color": "#ffffff",
+        "selectedColor": "#182b43",
+        "borderStyle": "#f5f5f5",
+        "list": [
+            {
+                "selectedIconPath": "images/user-logo-blue.png",
+                "iconPath": "images/user-logo.png",
+                "pagePath": "pages/index/index",
+                "text": "个人信息"
+            },
+            {
+                "selectedIconPath": "images/register-logo-blue.png",
+                "iconPath": "images/register-logo.png",
+                "pagePath": "pages/activities/activities",
+                "text": "活动签到"
+            },
+            {
+                "selectedIconPath": "images/join-logo-blue.png",
+                "iconPath": "images/join-logo.png",
+                "pagePath": "pages/join/join",
+                "text": "加入我们"
+            }
+        ]
+    }
+}

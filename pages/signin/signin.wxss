@@ -1,0 +1,121 @@
+page {
+ height: 100%;
+  width: 100%;
+}
+.showError {
+  background: #de352d;
+  color: #fff;
+  height: 58rpx;
+  line-height: 58rpx;
+  font-size: 24rpx;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+}
+.content {
+  font-size: 20px;
+  background-image: url("http://jluibm.cn/src/wx/login-bg.png");
+  background-size: cover;
+  background-position: bottom;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+.head-content {
+  margin-top: 100rpx;
+  color: #fff;
+  font-size: 20px;
+  height: 200rpx;
+  text-align: center;
+}
+.logo {
+  width: 400rpx;
+  height: 133rpx;
+  margin: 50rpx auto 20rpx auto;
+}
+
+.user-pic {
+  width: 100rpx;
+  height: 100rpx;
+  border: 1px solid #efefef;
+  border-radius: 50%;
+  margin: 10rpx auto 40rpx auto;
+}
+
+.user {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+
+.main-content {
+  color: #fff;
+  font-size: 16px;
+  padding-top: 50rpx;
+}
+
+.section {
+  margin: 0 100rpx 50rpx 100rpx;
+  border: 1px solid rgba(109, 182, 255, 0.2);
+  background-color: rgba(109, 182, 255, 0.1);
+  border-radius: 10rpx;
+}
+
+
+.section__title {
+  float: left;
+  height: 50rpx;
+  margin-top: 10rpx;
+  padding-left: 40rpx;
+  color: #bbb;
+}
+
+.form-group {
+  height: 50rpx;
+  margin-left: 150rpx;
+  margin-top: 0rpx;
+  padding: 10rpx 0rpx 10rpx 0rpx;
+  width: 350rpx;
+}
+
+.subform {
+  margin-bottom: 20rpx;
+  margin: 0;
+  padding: 15rpx 0rpx;
+}
+
+.btn-area {
+  border: 0;
+  margin-top: 40rpx;
+  height: 120rpx;
+}
+
+.button {
+  font-size: 14px;
+  border-radius: 10rpx;
+  border: 1px solid rgba(109, 182, 255, 0.2);
+  text-align: center;
+  height: 60rpx;
+  margin: 0 100rpx 30rpx 100rpx;
+}
+
+#submit {
+  position: fixed;
+  bottom: 120rpx;
+  right: 0;
+  left: 0;
+  background-color: #0067b8;
+  color: #efefef;
+}
+
+#joinus {
+  position: fixed;
+  bottom: 30rpx;
+  right: 0;
+  left: 0;
+  color: #0067b8;
+  background-color: #efefef;
+}
