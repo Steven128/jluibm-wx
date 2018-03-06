@@ -1,14 +1,25 @@
-.content {
-  background-color: #f5f5f5;
-  color: #000;
+page, html, body {
+    height: 100%;
+}
 
+.container {
+    display: block;
+    height: 100%;
+    background-color: #f5f5f5;
 }
-.emptyBlock {
-  padding-top: 200rpx;
-}
+
+
 .text {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 20rpx;
-  height: 500rpx;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 100rpx;
+}
+
+.img {
+    width: 500rpx;
+    height: 500rpx;
+}
+
+.img-text {
+    margin: 80rpx 0;
 }

@@ -34,7 +34,7 @@ Page({
             if (avatar) {
                 //  获取到裁剪后的图片
                 wx.redirectTo({
-                    url: '../password/password?avatar=${avatar}'
+                    url: `../password/password?avatar=${avatar}`
                 })
             } else {
                 console.log('获取图片失败，请稍后重试')
@@ -56,18 +56,15 @@ Page({
             }
         })
     },
-    onLoad(option) {
+    onLoad(options) {
         const { cropperOpt } = this.data
 
-        if (option.src) {
-            cropperOpt.src = option.src
+        if (options.src) {
+            cropperOpt.src = options.src
             new WeCropper(cropperOpt)
                 .on('ready', (ctx) => {
-                    console.log('wecropper is ready for work!')
                 })
                 .on('beforeImageLoad', (ctx) => {
-                    console.log('before picture loaded, i can do something')
-                    console.log('current canvas context:', ctx)
                     wx.showToast({
                         title: '上传中',
                         icon: 'loading',
@@ -75,13 +72,9 @@ Page({
                     })
                 })
                 .on('imageLoad', (ctx) => {
-                    console.log('picture loaded')
-                    console.log('current canvas context:', ctx)
                     wx.hideToast()
                 })
                 .on('beforeDraw', (ctx, instance) => {
-                    console.log('before canvas draw,i can do something')
-                    console.log('current canvas context:', ctx)
                 })
                 .updateCanvas()
         }

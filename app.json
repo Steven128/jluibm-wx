@@ -1,9 +1,9 @@
 {
     "pages": [
-        "pages/password/password",
         "pages/index/index",
         "pages/activities/activities",
         "pages/join/join",
+        "pages/password/password",
         "pages/link/link",
         "pages/signin/signin",
         "pages/registered/registered",

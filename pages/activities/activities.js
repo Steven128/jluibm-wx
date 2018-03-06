@@ -13,7 +13,7 @@ Page({
         longitude: '',
         textData: {},
     },
-    makertap: function (e) {
+    makertap: function(e) {
         var id = e.markerId;
         var that = this;
         that.showMarkerInfo(markersData, id);
@@ -22,11 +22,11 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         var that = this;
         var myAmapFun = new amapFile.AMapWX({ key: 'be66e5ad6a733e0131fb8931ad796e60' });
         myAmapFun.getRegeo({
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
                 that.setData({
                     latitude: data[0].latitude,
@@ -34,12 +34,12 @@ Page({
                     textData: data[0],
                 })
             },
-            fail: function (info) {
+            fail: function(info) {
                 console.log(info)
             }
         })
     },
-    showMarkerInfo: function (data, i) {
+    showMarkerInfo: function(data, i) {
         var that = this;
         that.setData({
             textData: {
@@ -53,56 +53,57 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
 
-    sign: function () {
+    sign: function() {
         var that = this;
         var isLogged = false;
-        if (app.globalData.PHPSESSID != '') {
+        console.log(app.globalData.userNumber);
+        if (app.globalData.userNumber != '') {
             isLogged = true;
         }
         if (!isLogged) {
@@ -110,15 +111,14 @@ Page({
                 title: '提示',
                 content: '先登录才能签到哟！',
                 showCancel: 'false',
-                success: function () {
+                success: function() {
                     wx.navigateTo({
                         url: '../signin/signin',
                     })
                 }
             });
 
-        }
-        else {
+        } else {
             wx.request({
                 url: 'https://www.jluibm.cn/jluibm-wx/activity.php',
                 method: "GET",
@@ -129,13 +129,18 @@ Page({
                     'content-Type': 'application/json',
                     'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
                 },
-                success: function (res) {
+                success: function(res) {
+                    wx.showToast({
+                        title: '请稍后',
+                        icon: 'loading',
+                        duration: 500
+                    })
                     console.log(res);
-                    if (res.data == "has_active") {
+                    if (res.data.message == "has_active") {
                         //有正在进行的活动，可以签到
                         wx.scanCode({
                             // onlyFromCamera: true,
-                            success: function (res) {
+                            success: function(res) {
                                 console.log(app.globalData.userNumber);
                                 //扫码结果
                                 var href = res.result;
@@ -148,11 +153,6 @@ Page({
                                 var latitude = that.data.latitude;
                                 var longitude = that.data.longitude;
                                 if (terminal >= timestamp) {
-                                    wx.showToast({
-                                        title: '请稍后',
-                                        icon: 'loading',
-                                        duration: 500
-                                    })
                                     wx.request({
                                         url: 'https://' + href + "&number=" + userNumber + "&submitTime=" + submitTime + "&location=" + longitude + "/" + latitude,
                                         method: "GET",
@@ -161,45 +161,47 @@ Page({
                                             'content-Type': 'application/json',
                                             'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
                                         },
-                                        success: function (sign_info) {
+                                        success: function(sign_info) {
+                                            wx.hideToast()
                                             console.log(sign_info);
-                                            if (sign_info.data == 'success') {
+                                            if (sign_info.data.message == 'success') {
                                                 wx.showModal({
                                                     title: '提示',
                                                     content: '签到成功！',
                                                     showCancel: 'false',
-                                                    success: function () { },
+                                                    success: function() {},
                                                 });
-                                            }
-                                            else if (sign_info.data == 'already_signed') {
+                                            } else if (sign_info.data.message == 'already_signed') {
+                                                wx.hideToast()
                                                 wx.showModal({
                                                     title: '提示',
                                                     content: '你已签到，不要重复签到哟！',
                                                     showCancel: 'false',
-                                                    success: function () { },
+                                                    success: function() {},
                                                 });
-                                            }
-                                            else {
+                                            } else {
+                                                wx.hideToast()
                                                 wx.showModal({
                                                     title: '提示',
                                                     content: '出错啦，再试一次吧！',
                                                     showCancel: 'false',
-                                                    success: function () { },
+                                                    success: function() {},
                                                 });
                                             }
                                         },
-                                        error: function (sing_err) {
+                                        error: function(sign_err) {
+                                            wx.hideToast()
                                             wx.showModal({
                                                 title: '提示',
                                                 content: '出错啦，再试一次吧！',
                                                 showCancel: 'false',
-                                                success: function () { },
+                                                success: function() {},
                                             });
                                             console.log("failed");
                                         }
                                     })
-                                }
-                                else {
+                                } else {
+                                    wx.hideToast()
                                     wx.showModal({
                                         title: '提示',
                                         content: '签到已经结束啦！',
@@ -207,7 +209,8 @@ Page({
                                     })
                                 }
                             },
-                            error: function (err) {
+                            error: function(err) {
+                                wx.hideToast()
                                 console.log("failed");
                             }
                         });
@@ -221,7 +224,7 @@ Page({
                         })
                     }
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log("failed");
                 },
             });

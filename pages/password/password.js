@@ -2,7 +2,8 @@ var app = getApp();
 var util = require('../../utils/util.js');
 import WxValidate from '../../utils/WxValidate.js';
 var md5 = require('../../utils/md5');
-var Validate = ""
+var Validate = "";
+var userNumber = "";
 
 Page({
 
@@ -21,9 +22,9 @@ Page({
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success(res) {
                 const src = res.tempFilePaths[0]
-                console.log(src);
+
                 wx.redirectTo({
-                    url: '../upload/upload?src=${src}'
+                    url: `../upload/upload?src=${src}`
                 })
             }
         })
@@ -32,13 +33,14 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-
-        let { avatar } = options
+    onLoad: function (option) {
+        var that = this;
+        let { avatar } = option
         if (avatar) {
             this.setData({
                 src: avatar
             })
+            console.log(this.data.src);
         }
 
         const rules = {
@@ -62,7 +64,7 @@ Page({
             },
             repassword: {
                 required: '请再次输入密码',
-                equalTo: '两次输入密码必须相同'
+                equalTo: '两次输入密码不一致'
             },
             email: {
                 required: '请输入验证邮箱',
@@ -139,7 +141,14 @@ Page({
         });
         //先提交报名表单数据
         var formData = app.globalData.formData;
+        userNumber = formData.number;
         var submitTime = util.formatTime(new Date());
+        wx.showToast({
+            title: '请稍后',
+            icon: 'loading',
+            duration: 1500,
+            mask: true
+        });
         wx.request({
             url: 'https://www.jluibm.cn/jluibm-wx/form.php',
             method: "POST",
@@ -161,27 +170,22 @@ Page({
                 'content-Type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
-                console.log('success');
+                console.log('form success');
                 console.log(res.data);
-                if (res.data == "success") {
+                if (res.data.message == "success") {
                     console.log('success toast');
-                    wx.showToast({
-                        title: '提交成功',
-                        icon: 'success',
-                        duration: 1500,
-                        mask: true
-                    });
                     app.globalData.userNumber = that.data.userNumber;
                     app.globalData.formData = '';
                     //下面提交密码和邮箱
-                    var password = 'JLUIBMclub' + app.globalData.userNumber + e.detail.value.password;
+                    var password = 'JLUIBMclub' + userNumber + e.detail.value.password;
                     password = md5.hex_md5(password);
-
+                    console.log(userNumber);
+                    console.log(password);
                     wx.request({
                         url: 'https://www.jluibm.cn/jluibm-wx/set-password.php',
                         method: "POST",
                         data: {
-                            number: app.globalData.userNumber,
+                            number: userNumber,
                             password: password,
                             email: e.detail.value.email
                         },
@@ -189,29 +193,88 @@ Page({
                             'content-Type': 'application/x-www-form-urlencoded' // 默认值
                         },
                         success: function (res) {
-                            console.log('success');
+                            console.log('password success');
                             console.log(res.data);
-                            if (res.data == "success") {
-                                console.log('success toast');
-                                app.globalData.userNumber = '';
-                                wx.showModal({
-                                    title: '提交成功',
-                                    content: '请尽快确认邮箱',
-                                    showCancel: 'false',
-                                    success: function () {
-                                        wx.navigateTo({
-                                            url: '/pages/link/link'
-                                        });
-                                    }
-                                });
+                            if (res.data.message == "success") {
+                                //上传头像
+                                if (that.data.src == '') {
+                                    //未选择头像
+                                    console.log('success toast');
+                                    app.globalData.userNumber = '';
+                                    wx.hideToast();
+                                    wx.showModal({
+                                        title: '提示',
+                                        content: '提交成功',
+                                        showCancel: 'false',
+                                        success: function () {
+                                            wx.navigateTo({
+                                                url: '/pages/link/link'
+                                            });
+                                        }
+                                    });
+                                } else {
+                                    var tempFilePaths = that.data.src;
+                                    wx.uploadFile({
+                                        url: 'https://www.jluibm.cn/jluibm-wx/uploadPic.php',
+                                        filePath: tempFilePaths,
+                                        name: 'file',
+                                        formData: {
+                                            number: 55160208,
+                                        },
+                                        success: function (res) {
+                                            console.log(res.data);
+                                            var resData = res.data;
+                                            if (resData.indexOf("success") > 0) {
+                                                console.log('success toast');
+                                                app.globalData.userNumber = '';
+                                                wx.hideToast();
+                                                wx.showModal({
+                                                    title: '提示',
+                                                    content: '提交成功',
+                                                    showCancel: 'false',
+                                                    success: function () {
+                                                        wx.navigateTo({
+                                                            url: '/pages/link/link'
+                                                        });
+                                                    }
+                                                });
+                                            } else {
+                                                wx.hideToast();
+                                                wx.showToast({
+                                                    title: '出错啦\n再试一次吧',
+                                                    icon: 'loading',
+                                                    duration: 2000,
+                                                    mask: true
+                                                })
+                                            }
+                                        },
+                                        fail: function (err) {
+                                            console.log(err);
+                                            wx.hideToast();
+                                            wx.showToast({
+                                                title: '网络请求错误',
+                                                icon: 'loading',
+                                                duration: 2000,
+                                                mask: true
+                                            })
+                                        }
+                                    })
+                                }
                             }
                         },
                         fail: function (err) {
                             console.log(err);
+                            wx.hideToast();
+                            wx.showToast({
+                                title: '网络请求错误',
+                                icon: 'loading',
+                                duration: 2000,
+                                mask: true
+                            })
                         }
                     });
-                }
-                else {
+                } else {
+                    wx.hideToast();
                     wx.showToast({
                         title: '出错啦\n再试一次吧',
                         icon: 'loading',
@@ -223,8 +286,9 @@ Page({
             fail: function (err) {
                 console.log(err);
                 that.data.submitSuccess = false;
+                wx.hideToast();
                 wx.showToast({
-                    title: '出错啦\n再试一次吧',
+                    title: '网络请求错误',
                     icon: 'loading',
                     duration: 2000,
                     mask: true

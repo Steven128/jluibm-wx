@@ -114,17 +114,16 @@ class WxValidate {
             number(value) {
                 return that.optional(value) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value)
             },
+
+
+            chinese(value) {
+                return that.optional(value) || /[\u4E00-\u9FA5\uF900-\uFA2D]/.test(value)
+            },
             /**
              * 验证整数
              */
             digits(value) {
                 return that.optional(value) || /^\d+$/.test(value)
-            },
-            /**
-             * 验证中文
-             */
-            chinese(value) {
-              return that.optional(value) || /[\u4E00-\u9FA5\uF900-\uFA2D]/.test(value)
             },
             /**
              * 验证身份证号码
@@ -213,7 +212,7 @@ class WxValidate {
     formatTpl(source, params) {
         const that = this
         if (arguments.length === 1) {
-            return function() {
+            return function () {
                 let args = Array.from(arguments)
                 args.unshift(source)
                 return that.formatTpl.apply(this, args)
@@ -228,8 +227,8 @@ class WxValidate {
         if (params.constructor !== Array) {
             params = [params]
         }
-        params.forEach(function(n, i) {
-            source = source.replace(new RegExp("\\{" + i + "\\}", "g"), function() {
+        params.forEach(function (n, i) {
+            source = source.replace(new RegExp("\\{" + i + "\\}", "g"), function () {
                 return n
             })
         })

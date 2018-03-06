@@ -24,28 +24,26 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         var that = this;
         var myAmapFun = new amapFile.AMapWX({ key: 'be66e5ad6a733e0131fb8931ad796e60' });
         myAmapFun.getWeather({
-            success: function (data) {
-                console.log(data.liveData);
+            success: function(data) {
                 that.setData({
                     weather: data.liveData,
                     showWeather: true,
                 })
             },
-            fail: function (info) {
+            fail: function(info) {
                 console.log(info)
             }
         });
 
         wx.getStorage({
             key: 'PHPSESSID',
-            success: function (res) {
+            success: function(res) {
                 if (res.data != '') {
                     app.globalData.PHPSESSID = res.data;
-                    console.log(app.globalData.PHPSESSID);
                     var userNumber = '';
                     console.log(app.globalData.PHPSESSID);
                     if (app.globalData.isSigned && !that.data.showInfo) {
@@ -64,15 +62,14 @@ Page({
                                 'content-Type': 'application/json',
                                 'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
                             },
-                            success: function (res) {
+                            success: function(res) {
                                 console.log(res);
                                 if (res.data.number == null) {
                                     console.log("未登录！");
                                     that.setData({
                                         showInfo: false,
                                     });
-                                }
-                                else {
+                                } else {
                                     var getNumber = res.data.number;
                                     var getName = '';
                                     var getCollege = '';
@@ -89,7 +86,7 @@ Page({
                                             'content-Type': 'application/json',
                                             'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
                                         },
-                                        success: function (res) {
+                                        success: function(res) {
                                             console.log(res.data);
                                             getName = res.data.name;
                                             getNumber = res.data.number;
@@ -99,20 +96,16 @@ Page({
                                             getGrade = res.data.grade;
                                             if (getGender == "male") {
                                                 getGender = "男";
-                                            }
-                                            else {
+                                            } else {
                                                 getGender = "女";
                                             }
                                             if (getGrade == 1) {
                                                 getGrade = "大一";
-                                            }
-                                            else if (getGrade == 2) {
+                                            } else if (getGrade == 2) {
                                                 getGrade = "大二";
-                                            }
-                                            else if (getGrade == 3) {
+                                            } else if (getGrade == 3) {
                                                 getGrade = "大三";
-                                            }
-                                            else {
+                                            } else {
                                                 getGrade = "大四";
                                             }
 
@@ -128,15 +121,16 @@ Page({
                                                 showWait: false,
                                             });
                                             app.globalData.userNumber = getNumber;
+                                            console.log(app.globalData.userNumber);
                                         },
-                                        fail: function (err) {
+                                        fail: function(err) {
                                             console.log(err);
                                         }
 
                                     });
                                 }
                             },
-                            error: function (err) {
+                            error: function(err) {
                                 console.log("error");
                                 console.log(err);
                             }
@@ -147,7 +141,7 @@ Page({
         });
     },
 
-    userLogin: function () {
+    userLogin: function() {
         wx.navigateTo({
             url: '/pages/signin/signin'
         });
@@ -156,14 +150,14 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
         var that = this;
         var userNumber = '';
         console.log(app.globalData.PHPSESSID);
@@ -183,15 +177,14 @@ Page({
                     'content-Type': 'application/json',
                     'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
                 },
-                success: function (res) {
+                success: function(res) {
                     console.log(res);
                     if (res.data.number == null) {
                         console.log("未登录！");
                         that.setData({
                             showInfo: false,
                         });
-                    }
-                    else {
+                    } else {
                         var getNumber = res.data.number;
                         var getName = '';
                         var getCollege = '';
@@ -208,7 +201,7 @@ Page({
                                 'content-Type': 'application/json',
                                 'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
                             },
-                            success: function (res) {
+                            success: function(res) {
                                 console.log(res.data);
                                 getName = res.data.name;
                                 getNumber = res.data.number;
@@ -218,20 +211,16 @@ Page({
                                 getGrade = res.data.grade;
                                 if (getGender == "male") {
                                     getGender = "男";
-                                }
-                                else {
+                                } else {
                                     getGender = "女";
                                 }
                                 if (getGrade == 1) {
                                     getGrade = "大一";
-                                }
-                                else if (getGrade == 2) {
+                                } else if (getGrade == 2) {
                                     getGrade = "大二";
-                                }
-                                else if (getGrade == 3) {
+                                } else if (getGrade == 3) {
                                     getGrade = "大三";
-                                }
-                                else {
+                                } else {
                                     getGrade = "大四";
                                 }
 
@@ -248,14 +237,14 @@ Page({
                                 });
                                 app.globalData.userNumber = getNumber;
                             },
-                            fail: function (err) {
+                            fail: function(err) {
                                 console.log(err);
                             }
 
                         });
                     }
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log("error");
                     console.log(err);
                 }
@@ -268,39 +257,39 @@ Page({
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
 
-    logout: function () {
+    logout: function() {
         var that = this;
         console.log(app.globalData.PHPSESSID);
         wx.request({
@@ -313,20 +302,26 @@ Page({
                 'content-Type': 'application/json',
                 'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
             },
-            success: function (res) {
+            success: function(res) {
                 console.log(res);
                 if (res.data.number == null) {
                     console.log("未登录！");
                     that.setData({
                         showInfo: false,
+                        name: '',
+                        number: '',
+                        college: '',
+                        major: '',
+                        gender: '',
+                        grade: 'getGrade',
+                        userPicPath: 'https://www.jluibm.cn/userPicUpload/' + getNumber + '.png',
                     });
-                }
-                else {
+                } else {
                     wx.showModal({
                         title: '提示',
                         content: '确定要退出登录吗？',
                         showCancel: 'true',
-                        success: function (e) {
+                        success: function(e) {
                             if (e.confirm) {
                                 var getNumber = res.data.number;
                                 var getName = '';
@@ -344,9 +339,9 @@ Page({
                                         'content-Type': 'application/json',
                                         'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
                                     },
-                                    success: function (res) {
+                                    success: function(res) {
                                         console.log(res.data);
-                                        if (res.data == "success logout") {
+                                        if (res.data.message == "success logout") {
                                             app.globalData.PHPSESSID = '';
                                             app.globalData.userNumber = '';
                                             wx.setStorage({
@@ -359,14 +354,20 @@ Page({
                                             })
                                             that.setData({
                                                 showInfo: false,
+                                                name: '',
+                                                number: '',
+                                                college: '',
+                                                major: '',
+                                                gender: '',
+                                                grade: '',
+                                                userPicPath: '../../images/user-offline.png',
                                             });
                                             wx.showToast({
                                                 title: '退出成功！',
                                                 icon: 'success',
                                                 duration: 1500
                                             })
-                                        }
-                                        else {
+                                        } else {
                                             wx.showToast({
                                                 title: '出错啦，再试一次吧',
                                                 icon: 'loading',
@@ -375,7 +376,7 @@ Page({
                                         }
                                         console.log(app.globalData.PHPSESSID);
                                     },
-                                    fail: function (err) {
+                                    fail: function(err) {
                                         console.log(err);
                                     }
 
@@ -391,7 +392,7 @@ Page({
                                 })
                             }
                         },
-                        fail: function () {
+                        fail: function() {
                             wx.showToast({
                                 title: '取消成功',
                                 duration: 1500,
@@ -402,7 +403,7 @@ Page({
 
                 }
             },
-            error: function (error) {
+            error: function(error) {
                 console.log("error");
                 console.log(err0r);
             }

@@ -22,9 +22,8 @@ page {
 }
 
 .map-title {
-  padding: 0;
-  margin: 0;
   background-color: #fff;
+  padding: 3rpx;
 }
 
 .map-title view {

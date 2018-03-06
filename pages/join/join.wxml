@@ -1,7 +1,8 @@
 <view class='container'>
   <view class='main-content'>
     <view id='title'>加入我们</view>
-    <form>
+    <view class='{{showErrMsg}}'>{{errorMsg}}</view>
+    <form bindsubmit="formSubmit">
       <view class='subform'>
         <view class="group">
           <view class="sub-title">基本信息</view>
@@ -88,7 +89,7 @@
         </view>
       </view>
       <view class="section btn-area">
-        <button class="button" formType="submit">点我报名</button>
+        <button class="button" form-type="submit">点我报名</button>
       </view>
     </form>
   </view>

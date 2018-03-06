@@ -1,11 +1,11 @@
-<view class="content">
-  <view class="emptyBlock"></view>
-  <view class="text">
-    <view class="success">报名成功！</view>
-    <view class="success">恭喜，现在你已是IBM俱乐部的成员了！</view>
-  </view>
-  <view class="text">
-    <view class="">欢迎加入新生群</view>
-    <view class=""></view>
-  </view>
+<view class="container">
+    <view class="emptyBlock"></view>
+    <view class="text">
+        <view class="success">报名成功！</view>
+    </view>
+    <view class="text">
+        <image class='img' src='../../images/qq_qrcode.png'></image>
+        <view class="img-text">请加入群2017IBMCLUB</view>
+        <view class=""></view>
+    </view>
 </view>
