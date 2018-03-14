@@ -93,6 +93,15 @@ body,page {
   border: 1px 0 1px 0;
 }
 
+.itemview {
+    height: 60rpx;
+    border-top: 1px solid #efefef;
+    padding: 10rpx;
+    margin-left: 170rpx;
+    margin-right: 20rpx;
+    color: green;
+}
+
 .checkbox {
   background-color: #fff;
   display: block;

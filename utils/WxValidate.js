@@ -115,7 +115,6 @@ class WxValidate {
                 return that.optional(value) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value)
             },
 
-
             chinese(value) {
                 return that.optional(value) || /[\u4E00-\u9FA5\uF900-\uFA2D]/.test(value)
             },

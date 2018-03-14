@@ -214,12 +214,13 @@ Page({
                                     });
                                 } else {
                                     var tempFilePaths = that.data.src;
+                                    console.log(formData.number);
                                     wx.uploadFile({
                                         url: 'https://www.jluibm.cn/jluibm-wx/uploadPic.php',
                                         filePath: tempFilePaths,
                                         name: 'file',
                                         formData: {
-                                            number: 55160208,
+                                            number: formData.number,
                                         },
                                         success: function (res) {
                                             console.log(res.data);

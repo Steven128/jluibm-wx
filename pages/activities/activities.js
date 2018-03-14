@@ -154,7 +154,7 @@ Page({
                                 var longitude = that.data.longitude;
                                 if (terminal >= timestamp) {
                                     wx.request({
-                                        url: 'https://' + href + "&number=" + userNumber + "&submitTime=" + submitTime + "&location=" + longitude + "/" + latitude,
+                                        url: 'https://' + href + "&number=" + userNumber + "&submitTime=" + submitTime + "&longitude=" + longitude + "&latitude=" + latitude,
                                         method: "GET",
                                         data: {},
                                         header: {
