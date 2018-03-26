@@ -12,7 +12,8 @@ Page({
      */
     data: {
         showErrorMsg: '',
-        src: ''
+        src: '',
+        disabled: false
     },
 
     upload() {
@@ -143,6 +144,9 @@ Page({
         var formData = app.globalData.formData;
         userNumber = formData.number;
         var submitTime = util.formatTime(new Date());
+        that.setData({
+            disabled: true
+        });
         wx.showToast({
             title: '请稍后',
             icon: 'loading',
