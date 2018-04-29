@@ -1,0 +1,142 @@
+page {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.container {
+    padding: 0;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.title {
+    color: #fff;
+    background-image: url("http://jluibm.cn/src/wx/login-bg.png");
+    background-size: cover;
+    font-size: 20px;
+    padding: 50rpx;
+}
+
+.main-content {
+    color: #000;
+}
+
+.user-online-show {
+    display: block;
+}
+
+.user-online-hide {
+    display: none;
+}
+
+.user-offline-show {
+    display: block;
+}
+
+.user-offline-hide {
+    display: none;
+}
+
+.user-info-show {
+    display: block;
+}
+
+.user-info-hide {
+    display: none;
+}
+
+.tourist-info-show {
+    display: block;
+}
+
+.tourist-info-hide {
+    display: none;
+}
+
+.waiting-show {
+    display: block;
+}
+
+.waiting-hide {
+    display: none;
+}
+
+.user-box {
+    height: 200rpx;
+    background-color: #fff;
+    padding: 40rpx 30rpx;
+    margin-bottom: 30rpx;
+}
+
+.user-text {
+    margin-left: 220rpx;
+    margin-top: 10rpx;
+}
+
+.user-welcome {
+    padding: 20rpx 0;
+    font-size: 35rpx;
+}
+
+.user-pic {
+    width: 180rpx;
+    height: 180rpx;
+    float: left;
+}
+
+.user {
+    background-image: url("http://www.jluibm.cn/src/wx/login-bg.png");
+    width: 175rpx;
+    height: 175rpx;
+    border-radius: 50%;
+    box-shadow: 0 0 5rpx #888;
+    border: 5px solid #fff;
+}
+
+.login {
+    font-size: 30rpx;
+    width: 180rpx;
+    height: 60rpx;
+    color: #0067b8;
+    background-color: transparent;
+    border: 1px solid rgba(109, 182, 255, 0.2);
+    border-radius: 10rpx;
+    line-height: 60rpx;
+    margin-left: 5rpx;
+}
+
+.info-box {
+    background-color: #fff;
+    padding: 20px;
+}
+
+.info-title {
+    font-size: 18px;
+    padding-bottom: 30rpx;
+}
+
+.info-inner {}
+
+
+
+.info {
+    padding-bottom: 10rpx;
+    margin-top: 5rpx;
+    border-bottom: 1px solid #eee;
+}
+
+.logout {
+    font-size: 25rpx;
+    width: 180rpx;
+    height: 60rpx;
+    border: 1px solid #fff;
+    background-color: darkred;
+    color: #fff;
+    border-radius: 10rpx;
+    line-height: 60rpx;
+    margin-left: 5rpx;
+}
