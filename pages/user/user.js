@@ -145,7 +145,7 @@ Page({
         var that = this;
         var userNumber = '';
         if (app.globalData.isSigned && !that.data.showInfo) {
-            that.setData({showWait: true})
+            that.setData({showWait: true});
         }
         if (!that.data.showInfo) {
             wx.request({
