@@ -77,7 +77,7 @@
                         </view>
                     </view>
                 </view>
-                <view class="section">
+                <view class="section choose-group">
                     <view class="sub-title">你想加入哪个组呢？</view>
                     <checkbox-group bindchange="checkboxChange" name="languages">
                         <label class="checkbox" wx:for="{{languages}}">

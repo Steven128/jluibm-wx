@@ -1,3 +1,4 @@
+//activity.js 活动签到
 var app = getApp()
 var util = require('../../utils/util.js');
 var amapFile = require('../../libs/amap-wx.js');
@@ -27,7 +28,6 @@ Page({
         var myAmapFun = new amapFile.AMapWX({ key: 'be66e5ad6a733e0131fb8931ad796e60' });
         myAmapFun.getRegeo({
             success: function(data) {
-                console.log(data);
                 that.setData({
                     latitude: data[0].latitude,
                     longitude: data[0].longitude,
@@ -102,7 +102,6 @@ Page({
     sign: function() {
         var that = this;
         var isLogged = false;
-        console.log(app.globalData.userNumber);
         if (app.globalData.userNumber != '') {
             isLogged = true;
         }
@@ -135,13 +134,11 @@ Page({
                         icon: 'loading',
                         duration: 500
                     })
-                    console.log(res);
                     if (res.data.message == "has_active") {
                         //有正在进行的活动，可以签到
                         wx.scanCode({
                             // onlyFromCamera: true,
                             success: function(res) {
-                                console.log(app.globalData.userNumber);
                                 //扫码结果
                                 var href = res.result;
                                 var timestamp = Date.parse(new Date());
@@ -163,7 +160,6 @@ Page({
                                         },
                                         success: function(sign_info) {
                                             wx.hideToast()
-                                            console.log(sign_info);
                                             if (sign_info.data.message == 'success') {
                                                 wx.showModal({
                                                     title: '提示',

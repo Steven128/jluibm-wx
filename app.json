@@ -1,12 +1,12 @@
 {
     "pages": [
-        "pages/index/index",
+        "pages/enroll/enroll",
         "pages/activities/activities",
+        "pages/user/user",
         "pages/join/join",
         "pages/password/password",
         "pages/link/link",
         "pages/signin/signin",
-        "pages/registered/registered",
         "pages/upload/upload"
     ],
     "window": {
@@ -22,20 +22,26 @@
         "borderStyle": "#f5f5f5",
         "list": [
             {
-                "selectedIconPath": "images/user-logo-blue.png",
-                "iconPath": "images/user-logo.png",
-                "pagePath": "pages/index/index",
-                "text": "个人信息"
+                "selectedIconPath": "images/enroll-active.png",
+                "iconPath": "images/enroll.png",
+                "pagePath": "pages/enroll/enroll",
+                "text": "活动报名"
             },
             {
-                "selectedIconPath": "images/register-logo-blue.png",
-                "iconPath": "images/register-logo.png",
+                "selectedIconPath": "images/activity-active.png",
+                "iconPath": "images/activity.png",
                 "pagePath": "pages/activities/activities",
                 "text": "活动签到"
             },
             {
-                "selectedIconPath": "images/join-logo-blue.png",
-                "iconPath": "images/join-logo.png",
+                "selectedIconPath": "images/user-active.png",
+                "iconPath": "images/user.png",
+                "pagePath": "pages/user/user",
+                "text": "个人信息"
+            },
+            {
+                "selectedIconPath": "images/join-active.png",
+                "iconPath": "images/join.png",
                 "pagePath": "pages/join/join",
                 "text": "加入我们"
             }

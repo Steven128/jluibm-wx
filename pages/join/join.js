@@ -1,3 +1,4 @@
+//join.js 加入我们 - 填写基本信息
 var app = getApp();
 var util = require('../../utils/util.js');
 import WxValidate from '../../utils/WxValidate.js';
@@ -115,15 +116,12 @@ Page({
         var hasMajor = 0;
         this.WxValidate.addMethod("major", (value, param) => {
             var targetCollege = this.WxValidate.scope.detail.value[param];
-            console.log(value)
-            console.log(targetCollege)
             for (var index in majorData.majorData) {
                 if (majorData.majorData[index].college == targetCollege) {
                     //检查该学院中有没有所选的专业
                     var majorList = majorData.majorData[index].major;
                     for (var i in majorList) {
                         if (majorList[i] == value) {
-                            console.log(majorList[i]);
                             hasMajor = 1;
                             break;
                         }
@@ -131,7 +129,6 @@ Page({
                             hasMajor = 0;
                         }
                     }
-                    console.log(hasMajor)
                 }
             }
             return this.WxValidate.optional(value) || hasMajor
@@ -238,7 +235,6 @@ Page({
                 }
             })
         }
-        console.log(newSource)
         if (newSource.length != 0) {
             this.setData({
                 bindMajor: newSource
@@ -262,7 +258,6 @@ Page({
         if (!this.WxValidate.checkForm(e)) {
             const error = this.WxValidate.errorList
             //提示信息  
-            console.log(error);
             this.setData({
                 errorMsg: error[0].msg,
                 showErrMsg: 'showError',
@@ -273,7 +268,6 @@ Page({
             errorMsg: '',
             showErrMsg: '',
         });
-        console.log(e);
         var submitTime = util.formatTime(new Date());
         wx.showModal({
             title: '提示',
@@ -281,10 +275,8 @@ Page({
             showCancel: 'true',
             success: function (res) {
                 //
-                console.log(res.confirm);
                 if (res.confirm) {
                     that.data.sure = true;
-                    console.log('wx.request');
                     that.setData({
                         userNumber: e.detail.value.number
                     });
@@ -299,8 +291,6 @@ Page({
                             'content-Type': 'application/x-www-form-urlencoded' // 默认值
                         },
                         success: function (res) {
-                            console.log('success');
-                            console.log(res.data);
                             if (res.data.message == "has joined") {
                                 wx.showModal({
                                     title: '提示',
@@ -328,7 +318,6 @@ Page({
                     });
                 }
                 if (res.cancel) {
-                    console.log('cancel toast');
                     wx.showToast({
                         title: '取消成功',
                         icon: 'success',
@@ -338,13 +327,11 @@ Page({
                 }
             },
             fail: function (err) {
-                console.log('cancel button');
                 console.log(err);
             }
         })
     },
     bindPickerChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             index: e.detail.value
         })

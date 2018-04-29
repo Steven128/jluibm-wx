@@ -1,3 +1,4 @@
+//password.js 加入我们 - 填写密码、上传头像
 var app = getApp();
 var util = require('../../utils/util.js');
 import WxValidate from '../../utils/WxValidate.js';
@@ -41,7 +42,6 @@ Page({
             this.setData({
                 src: avatar
             })
-            console.log(this.data.src);
         }
 
         const rules = {
@@ -52,10 +52,6 @@ Page({
             repassword: {
                 required: true,
                 equalTo: 'password'
-            },
-            email: {
-                required: true,
-                email: true
             }
         }
         // 验证字段的提示信息，若不传则调用默认的信息  
@@ -66,10 +62,6 @@ Page({
             repassword: {
                 required: '请再次输入密码',
                 equalTo: '两次输入密码不一致'
-            },
-            email: {
-                required: '请输入验证邮箱',
-                email: '请输入正确的邮箱地址'
             }
         }
         Validate = new WxValidate(rules, messages)
@@ -131,7 +123,6 @@ Page({
         if (!Validate.checkForm(e)) {
             const error = Validate.errorList;
             //提示信息  
-            console.log(error);
             this.setData({
                 showErrorMsg: error[0].msg,
             });
@@ -174,36 +165,27 @@ Page({
                 'content-Type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
-                console.log('form success');
-                console.log(res.data);
                 if (res.data.message == "success") {
-                    console.log('success toast');
                     app.globalData.userNumber = that.data.userNumber;
                     app.globalData.formData = '';
                     //下面提交密码和邮箱
                     var password = 'JLUIBMclub' + userNumber + e.detail.value.password;
                     password = md5.hex_md5(password);
-                    console.log(userNumber);
-                    console.log(password);
                     wx.request({
                         url: 'https://www.jluibm.cn/jluibm-wx/set-password.php',
                         method: "POST",
                         data: {
                             number: userNumber,
                             password: password,
-                            email: e.detail.value.email
                         },
                         header: {
                             'content-Type': 'application/x-www-form-urlencoded' // 默认值
                         },
                         success: function (res) {
-                            console.log('password success');
-                            console.log(res.data);
                             if (res.data.message == "success") {
                                 //上传头像
                                 if (that.data.src == '') {
                                     //未选择头像
-                                    console.log('success toast');
                                     app.globalData.userNumber = '';
                                     wx.hideToast();
                                     wx.showModal({
@@ -218,7 +200,6 @@ Page({
                                     });
                                 } else {
                                     var tempFilePaths = that.data.src;
-                                    console.log(formData.number);
                                     wx.uploadFile({
                                         url: 'https://www.jluibm.cn/jluibm-wx/uploadPic.php',
                                         filePath: tempFilePaths,
@@ -227,10 +208,8 @@ Page({
                                             number: formData.number,
                                         },
                                         success: function (res) {
-                                            console.log(res.data);
                                             var resData = res.data;
                                             if (resData.indexOf("success") > 0) {
-                                                console.log('success toast');
                                                 app.globalData.userNumber = '';
                                                 wx.hideToast();
                                                 wx.showModal({

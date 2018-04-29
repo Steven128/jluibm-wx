@@ -109,6 +109,10 @@ body,page {
   padding: 10rpx 0rpx 10rpx 30rpx;
 }
 
+.choose-group {
+  padding-bottom: 10rpx;
+}
+
 .tips {
     border: 1px solid #ccc;
     border-radius: 10rpx;
@@ -117,13 +121,14 @@ body,page {
 }
 
 .tips-title {
-    width: 100rpx;
+    width: 120rpx;
     margin: 0;
     padding: 5px 10px;
     background-color: #fff;
     position: relative;
     top: -25px;
     left: 5px;
+    text-align: center;
 }
 
 .tips-item {

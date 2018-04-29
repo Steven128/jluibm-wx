@@ -1,3 +1,4 @@
+//sign.js 用户登录
 var app = getApp();
 import WxValidate from '../../utils/WxValidate.js';
 var md5 = require('../../utils/md5');
@@ -94,7 +95,6 @@ Page({
         if (!Validate.checkForm(e)) {
             const error = Validate.errorList;
             //提示信息  
-            console.log(error);
             this.setData({
                 showErrorMsg: error[0].msg,
             });
@@ -107,10 +107,8 @@ Page({
         var info_Name = formData.name;
         if (info_Name == null || info_Name == '') { }
         that.data.sure = true;
-        console.log('wx.request');
         var password = 'JLUIBMclub' + e.detail.value.number + e.detail.value.password;
         password = md5.hex_md5(password);
-        console.log(password);
         wx.request({
             url: 'https://www.jluibm.cn/jluibm-wx/login.php',
             method: "POST",
@@ -122,8 +120,6 @@ Page({
                 'content-Type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
-                console.log('success');
-                console.log(res.data);
                 if (res.data.message == "wrong passwd") {
                     that.setData({
                         showErrorMsg: '密码输入错误！'
@@ -135,7 +131,6 @@ Page({
                     })
                 }
                 else if (res.data.message == "success") {
-                    console.log('success toast');
                     wx.showToast({
                         title: '登录成功',
                         icon: 'success',
@@ -145,8 +140,6 @@ Page({
                     app.globalData.isSigned = true;
                     app.globalData.PHPSESSID = res.data.PHPSESSID;
                     app.globalData.userNumber = res.data.number;
-                    console.log(app.globalData.PHPSESSID);
-                    console.log(app.globalData.userNumber);
                     wx.setStorage({
                         key: "PHPSESSID",
                         data: app.globalData.PHPSESSID
@@ -175,7 +168,6 @@ Page({
         });
     },
     joinus: function () {
-        console.log("navigate to joinus");
         wx.switchTab({
             url: '../join/join'
         });

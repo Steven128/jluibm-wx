@@ -1,6 +1,0 @@
-<view class='content'>
-  <view class='main-content'>
-    <icon class='successIcon' type='success' size='64'></icon>
-    <view class='successText'>签到成功！</view>
-  </view>
-</view>
