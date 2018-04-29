@@ -291,11 +291,8 @@ Page({
                                 var getGender = '';
                                 var getGrade = '';
                                 wx.request({
-                                    url: 'https://www.jluibm.cn/jluibm-wx/check_login.php',
+                                    url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=logout',
                                     method: "GET",
-                                    data: {
-                                        request: "logout"
-                                    },
                                     header: {
                                         'content-Type': 'application/json',
                                         'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
