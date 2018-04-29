@@ -48,11 +48,8 @@ Page({
                     }
                     if (!that.data.showInfo) {
                         wx.request({
-                            url: 'https://www.jluibm.cn/jluibm-wx/check_login.php',
+                            url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
                             method: "GET",
-                            data: {
-                                request: "getNumber"
-                            },
                             header: {
                                 'content-Type': 'application/json',
                                 'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
@@ -68,11 +65,8 @@ Page({
                                     var getGender = '';
                                     var getGrade = '';
                                     wx.request({
-                                        url: 'https://www.jluibm.cn/jluibm-wx/user-info.php',
+                                        url: 'https://www.jluibm.cn/jluibm-wx/user-info.php?number=' + getNumber,
                                         method: "GET",
-                                        data: {
-                                            number: getNumber
-                                        },
                                         header: {
                                             'content-Type': 'application/json',
                                             'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
@@ -149,11 +143,8 @@ Page({
         }
         if (!that.data.showInfo) {
             wx.request({
-                url: 'https://www.jluibm.cn/jluibm-wx/check_login.php',
+                url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
                 method: "GET",
-                data: {
-                    request: "getNumber"
-                },
                 header: {
                     'content-Type': 'application/json',
                     'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
@@ -169,11 +160,8 @@ Page({
                         var getGender = '';
                         var getGrade = '';
                         wx.request({
-                            url: 'https://www.jluibm.cn/jluibm-wx/user-info.php',
+                            url: 'https://www.jluibm.cn/jluibm-wx/user-info.php?number' + getNumber,
                             method: "GET",
-                            data: {
-                                number: getNumber
-                            },
                             header: {
                                 'content-Type': 'application/json',
                                 'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
@@ -256,11 +244,8 @@ Page({
     logout: function () {
         var that = this;
         wx.request({
-            url: 'https://www.jluibm.cn/jluibm-wx/check_login.php',
+            url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
             method: "GET",
-            data: {
-                request: "getNumber"
-            },
             header: {
                 'content-Type': 'application/json',
                 'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID

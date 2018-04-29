@@ -119,11 +119,8 @@ Page({
 
         } else {
             wx.request({
-                url: 'https://www.jluibm.cn/jluibm-wx/activity.php',
+                url: 'https://www.jluibm.cn/jluibm-wx/activity.php?request=check',
                 method: "GET",
-                data: {
-                    request: 'check'
-                },
                 header: {
                     'content-Type': 'application/json',
                     'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
@@ -153,7 +150,6 @@ Page({
                                     wx.request({
                                         url: 'https://' + href + "&number=" + userNumber + "&submitTime=" + submitTime + "&longitude=" + longitude + "&latitude=" + latitude,
                                         method: "GET",
-                                        data: {},
                                         header: {
                                             'content-Type': 'application/json',
                                             'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
