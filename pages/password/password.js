@@ -16,7 +16,9 @@ Page({
         src: '',
         disabled: false
     },
-
+    /**
+     * 点击 `上传图片按钮` 
+     */
     upload() {
         wx.chooseImage({
             count: 1, // 默认9
@@ -168,7 +170,7 @@ Page({
                 if (res.data.message == "success") {
                     app.globalData.userNumber = that.data.userNumber;
                     app.globalData.formData = '';
-                    //下面提交密码和邮箱
+                    //下面提交密码
                     var password = 'JLUIBMclub' + userNumber + e.detail.value.password;
                     password = md5.hex_md5(password);
                     wx.request({

@@ -16,6 +16,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        //表单验证规则
         const rules = {
             number: {
                 required: true,
@@ -109,6 +110,7 @@ Page({
         that.data.sure = true;
         var password = 'JLUIBMclub' + e.detail.value.number + e.detail.value.password;
         password = md5.hex_md5(password);
+        //提交用户名和密码
         wx.request({
             url: 'https://www.jluibm.cn/jluibm-wx/login.php',
             method: "POST",
@@ -137,6 +139,7 @@ Page({
                         duration: 1500,
                         mask: true
                     });
+                    //登陆成功，把信息写入localStorage和全局变量
                     app.globalData.isSigned = true;
                     app.globalData.PHPSESSID = res.data.PHPSESSID;
                     app.globalData.userNumber = res.data.number;
@@ -167,6 +170,9 @@ Page({
             },
         });
     },
+    /**
+     * 点击 `加入我们` 跳转到该页面
+     */
     joinus: function () {
         wx.switchTab({
             url: '../join/join'

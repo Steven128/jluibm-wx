@@ -105,6 +105,7 @@ Page({
         if (app.globalData.userNumber != '') {
             isLogged = true;
         }
+        //是否已登录
         if (!isLogged) {
             wx.showModal({
                 title: '提示',
@@ -118,6 +119,7 @@ Page({
             });
 
         } else {
+            //检查有没有可签到的活动
             wx.request({
                 url: 'https://www.jluibm.cn/jluibm-wx/activity.php?request=check',
                 method: "GET",
@@ -138,15 +140,19 @@ Page({
                             success: function(res) {
                                 //扫码结果
                                 var href = res.result;
+                                //href为扫码结果
                                 var timestamp = Date.parse(new Date());
                                 timestamp = timestamp / 1000;
+                                //timestamp为系统目前的时间
                                 var terminal = href.match(/\&terminal=(.*?)$/)[1];
                                 terminal = parseInt(terminal);
+                                //terminal为签到截止时间
                                 var userNumber = app.globalData.userNumber;
                                 var submitTime = util.formatTime(new Date()).substring(11, 19);
                                 var latitude = that.data.latitude;
                                 var longitude = that.data.longitude;
                                 if (terminal >= timestamp) {
+                                    //签到尚未结束
                                     wx.request({
                                         url: 'https://' + href + "&number=" + userNumber + "&submitTime=" + submitTime + "&longitude=" + longitude + "&latitude=" + latitude,
                                         method: "GET",
@@ -207,7 +213,7 @@ Page({
                             }
                         });
                     }
-                    //没有正在进行的活动或出错
+                    //没有正在进行的活动或网络出错
                     else {
                         wx.showModal({
                             title: '提示',

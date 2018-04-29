@@ -1,3 +1,4 @@
+//upload.js 选择、裁剪头像
 import WeCropper from '../we-cropper/we-cropper.js'
 
 const device = wx.getSystemInfoSync()

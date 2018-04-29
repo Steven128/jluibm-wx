@@ -37,6 +37,7 @@ Page({
             }
         });
 
+        //从localStorage中获取session id
         wx.getStorage({
             key: 'PHPSESSID',
             success: function (res) {
@@ -47,6 +48,7 @@ Page({
                         that.setData({showWait: true})
                     }
                     if (!that.data.showInfo) {
+                        //检查用户是否在登录状态
                         wx.request({
                             url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
                             method: "GET",
@@ -56,8 +58,10 @@ Page({
                             },
                             success: function (res) {
                                 if (res.data.number == null) {
+                                    //未登录
                                     that.setData({showInfo: false});
                                 } else {
+                                    //已登录，这时去获取用户信息
                                     var getNumber = res.data.number;
                                     var getName = '';
                                     var getCollege = '';
@@ -142,6 +146,7 @@ Page({
             that.setData({showWait: true});
         }
         if (!that.data.showInfo) {
+            //没显示用户信息的话去检查是否在登录状态
             wx.request({
                 url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
                 method: "GET",
@@ -151,8 +156,10 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.number == null) {
+                        //未登录
                         that.setData({showInfo: false});
                     } else {
+                        //已登录，去获取个人信息
                         var getNumber = res.data.number;
                         var getName = '';
                         var getCollege = '';
