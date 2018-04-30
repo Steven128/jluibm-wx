@@ -40,7 +40,7 @@
             <view class="info-box">
                 <view class="info-inner">
                     <view class="info">还不是社员？</view>
-                    <view class="info">欢迎加入我们</view>
+                    <view class="info">欢迎<view class="joinus" bindtap="joinus">加入我们</view></view>
                 </view>
             </view>
         </view>

@@ -167,7 +167,7 @@ Page({
                         var getGender = '';
                         var getGrade = '';
                         wx.request({
-                            url: 'https://www.jluibm.cn/jluibm-wx/user-info.php?number' + getNumber,
+                            url: 'https://www.jluibm.cn/jluibm-wx/user-info.php?number=' + getNumber,
                             method: "GET",
                             header: {
                                 'content-Type': 'application/json',
@@ -331,5 +331,11 @@ Page({
                 console.log(error);
             }
         });
+    },
+
+    joinus: function() {
+        wx.navigateTo({
+            url: '/pages/join/join'
+        })
     }
 })

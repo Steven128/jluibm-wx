@@ -38,12 +38,6 @@
                 "iconPath": "images/user.png",
                 "pagePath": "pages/user/user",
                 "text": "个人信息"
-            },
-            {
-                "selectedIconPath": "images/join-active.png",
-                "iconPath": "images/join.png",
-                "pagePath": "pages/join/join",
-                "text": "加入我们"
             }
         ]
     }

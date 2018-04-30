@@ -152,7 +152,7 @@ Page({
                         data: res.data.number
                     })
                     wx.navigateBack({
-                        url: '/pages/index/index',
+                        url: '/pages/user/user',
                         success: function (e) {
                         }
                     });
@@ -174,8 +174,13 @@ Page({
      * 点击 `加入我们` 跳转到该页面
      */
     joinus: function () {
-        wx.switchTab({
-            url: '../join/join'
+        wx.navigateBack({
+            url: '/pages/user/user',
+            success: function (e) {
+                wx.navigateTo({
+                    url: '/pages/join/join'
+                })
+            }
         });
     }
 

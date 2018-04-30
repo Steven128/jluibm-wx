@@ -140,3 +140,9 @@ page {
     line-height: 60rpx;
     margin-left: 5rpx;
 }
+
+.joinus {
+    color: #1296db;
+    text-decoration: underline;
+    display: inline;
+}
