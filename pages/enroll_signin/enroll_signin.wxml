@@ -1,0 +1,31 @@
+<view class="content">
+  <view class='showError' wx:if="{{showErrorMsg}}">{{showErrorMsg}}</view>
+  <view class='head-content'>
+    <image class="logo" src="http://jluibm.cn/src/wx/logo-transparent.png"></image>
+  </view>
+  <view class='main-content'>
+    <view class='user-pic'>
+      <image class='user' src='../../images/user-offline.png'></image>
+    </view>
+    <view id="form">
+      <form bindsubmit="formSubmit" id='main'>
+        <view class="section">
+          <view class="section__title">学号</view>
+          <view class='form-group'>
+            <input type="number" class="input-text" name="number" placeholder="请输入学号" confirm-type='next' />
+          </view>
+        </view>
+        <view class="section">
+          <view class="section__title">密码</view>
+          <view class="form-group">
+            <input type="password" class="input-text" name="password" placeholder="请输入密码" confirm-type='done' />
+          </view>
+        </view>
+        <view class="btn-area">
+          <button id='submit' class="button" formType="submit">登录</button>
+          <button id='joinus' class="button" bindtap='joinus'>其他社团成员填写报名信息</button>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,95 @@
+<view class='container'>
+    <view class='main-content'>
+        <view id='title'>填写报名信息</view>
+        <view class='{{showErrMsg}}'>{{errorMsg}}</view>
+        <form bindsubmit="formSubmit">
+            <view class='subform'>
+                <view class="group">
+                    <view class="sub-title">基本信息</view>
+                    <view class="section">
+                        <view class="section__title">姓名</view>
+                        <view class='form-group'>
+                            <input type="text" class="input-text" name="name" placeholder="请输入姓名" confirm-type='next' />
+                        </view>
+                    </view>
+                    <view class="section">
+                        <view class="section__title">学号</view>
+                        <view class='form-group'>
+                            <input type="number" class="input-text" name="number" placeholder="请输入学号" confirm-type='next' />
+                        </view>
+                    </view>
+                    <view class="section">
+                        <view class="section__title">学院</view>
+                        <view class="form-group">
+                            <input type="text" class="input-text" name="college" bindinput="bindcollege" value="{{inputCollege}}" placeholder="请输入学院" confirm-type='next' />
+                        </view>
+                        <scroll-view scroll-y="true" class="scrollview">
+                            <view wx:for="{{bindCollege}}">
+                                <view id="{{item}}" bindtap="collegeitemtap" class="itemview">{{item}}</view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                    <view class="section bottom-item">
+                        <view class="section__title">专业</view>
+                        <view class="form-group">
+                            <input type="text" class="input-text" name="major" bindinput="bindmajor" value="{{inputMajor}}" placeholder="请输入专业" confirm-type='next' />
+                        </view>
+                        <scroll-view scroll-y="true" class="scrollview">
+                            <view wx:for="{{bindMajor}}">
+                                <view id="{{item}}" bindtap="majoritemtap" class="itemview">{{item}}</view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                </view>
+                <view class="gender">
+                    <view class="sub-title">性别</view>
+                    <view class=''>
+                        <radio-group name="gender">
+                            <label class="radio">
+                                <radio value="male" checked="checked" />男 </label>
+                            <label class="radio">
+                                <radio value="female" />女</label>
+                        </radio-group>
+                    </view>
+                </view>
+                <view class="grade">
+                    <view class="sub-title">年级</view>
+                    <view class='grade-group'>
+                        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                            <view class="picker">
+                                <input type="hidden" disabled="true" name="grade" value="{{array[index]}}" />
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+                <view class="group">
+                    <view class="sub-title">联系方式</view>
+                    <view class="section">
+                        <view class="section__title">QQ</view>
+                        <view class='form-group'>
+                            <input type="number" class="input-text" name="qq" placeholder="请留下QQ号码" confirm-type='next' />
+                        </view>
+                    </view>
+                    <view class="section">
+                        <view class="section__title">手机号</view>
+                        <view class='form-group'>
+                            <input type="number" class="input-text" name="phone" placeholder="请留下电话号码" confirm-type='next' />
+                        </view>
+                    </view>
+                </view>
+                <view class="group">
+                    <view class="sub-title">来自哪个社团</view>
+                    <view class="section">
+                        <view class="section__title">社团名称</view>
+                        <view class='form-group'>
+                            <input type="number" class="input-text" name="comeFrom" placeholder="请填写您社团的名称" confirm-type='next' />
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="section btn-area">
+                <button class="button" form-type="submit">点我提交</button>
+            </view>
+        </form>
+    </view>
+</view>

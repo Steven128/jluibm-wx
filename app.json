@@ -1,6 +1,8 @@
 {
     "pages": [
         "pages/enroll/enroll",
+        "pages/enroll_join/enroll_join",
+        "pages/enroll_signin/enroll_signin",
         "pages/activities/activities",
         "pages/user/user",
         "pages/join/join",
@@ -8,6 +10,8 @@
         "pages/link/link",
         "pages/signin/signin",
         "pages/upload/upload"
+        
+        
     ],
     "window": {
         "backgroundTextStyle": "light",

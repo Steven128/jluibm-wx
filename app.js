@@ -29,6 +29,7 @@ App({
     PHPSESSID: '',
     userNumber: '',
     isSigned: false,
-    formData: ''
+    formData: '',
+    enroll_ID:''
   }
 })
