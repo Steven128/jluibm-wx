@@ -46,9 +46,9 @@
                     <view class=''>
                         <radio-group name="gender">
                             <label class="radio">
-                                <radio value="male" checked="checked" />男 </label>
+                                <radio value="0" checked="checked" />男 </label>
                             <label class="radio">
-                                <radio value="female" />女</label>
+                                <radio value="1" />女</label>
                         </radio-group>
                     </view>
                 </view>
