@@ -1,37 +1,42 @@
 <view class="container">
   <view id="title">活动报名</view>
-
   <view class='main-content'>
-  </view>
-
-  <view class='activity' wx:for="{{activity}}">
-    <view class='activity-box'>
-        <text style='font-weight:bold ;font-size:18px;' class='activity-name'>{{item.activity_name}}</text>
-        <view class='box'>
-          <view class='image-box'>
-            <image class='image' src='/images/activity-image.png'></image>
+    <view class="{{hasActivity?'noActivity-hide':'noActivity-show'}}">
+      <view class='activity-box'>
+        <view class='noActivity-text'>
+          当前没有可报名的活动哟~
+        </view>
+      </view>
+    </view>
+    <view class="{{hasActivity?'list-show':'list-hide'}}">
+      <view class='activity' wx:for="{{activity}}">
+        <view class='activity-box'>
+          <text style='font-weight:bold ;font-size:18px;' class='activity-name'>{{item.activity_name}}</text>
+          <view class='box'>
+            <view class='image-box'>
+              <image class='image' src='/images/activity-image.png'></image>
+            </view>
+            <view class='text-box'>
+              <text style='font-size:18px;'>限制人数{{item.quantity}}人</text>
+              <text> \n </text>
+              <text style='font-size:15px;color:#969696;'>活动时间:{{item.date}}</text>
+            </view>
           </view>
-          <view class='text-box'>
-            <text style='font-size:18px;' >限制人数{{item.quantity}}人</text>
-            <text> \n </text>
-            <text style='font-size:15px;color:#969696;'>活动时间:{{item.date}}</text>  
-          </view>  
-        </view> 
-        <view class='bottom'>
-          <view class='text-host'>
-            <text style='font-size:15px;color:#969696;'>由{{item.hold}}举办</text>
-          </view>
-          <view class='button'>
-            <button class='button-sign' style='font-size:15px;' bindtap='enroll{{index}}' >点击报名</button>
-          </view>
-          <!-- /*<modal hidden="{{hiddenmodalput}}" title="请输入来自哪个社团" confirm-text="提交" cancel-text="重置" bindcancel="cancel" bindconfirm="confirm">  
+          <view class='bottom'>
+            <view class='text-host'>
+              <text style='font-size:15px;color:#969696;'>由{{item.hold}}举办</text>
+            </view>
+            <view class='button'>
+              <button class='button-sign' style='font-size:15px;' bindtap='enroll'>点击报名</button>
+            </view>
+            <!-- /*<modal hidden="{{hiddenmodalput}}" title="请输入来自哪个社团" confirm-text="提交" cancel-text="重置" bindcancel="cancel" bindconfirm="confirm">  
             <input type='text' placeholder="社团名称" auto-focus/>
             
           </modal>  */ -->
+          </view>
         </view>
+      </view>
     </view>
   </view>
-  
+
 </view>
-
-
