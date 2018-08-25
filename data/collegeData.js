@@ -1,5 +1,4 @@
-var collegeData = [
-    {
+var collegeData = [{
         "name": "哲学社会学院",
         "code": "01",
     },
@@ -22,6 +21,10 @@ var collegeData = [
     {
         "name": "新闻与传播学院",
         "code": "37"
+    },
+    {
+        "name": "考古学院",
+        "code": "38"
     },
     {
         "name": "经济学院",
@@ -62,6 +65,10 @@ var collegeData = [
     {
         "name": "生命科学学院",
         "code": "13"
+    },
+    {
+        "name": "机械与航空航天工程学院",
+        "code": "14"
     },
     {
         "name": "机械科学与工程学院",
@@ -114,6 +121,10 @@ var collegeData = [
     {
         "name": "建设工程学院",
         "code": "24"
+    },
+    {
+        "name": "新能源与环境学院",
+        "code": "25"
     },
     {
         "name": "环境与资源学院",
@@ -191,4 +202,4 @@ var collegeData = [
 
 module.exports = {
     collegeData: collegeData
-}  
+}
