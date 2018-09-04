@@ -25,7 +25,10 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
-        var myAmapFun = new amapFile.AMapWX({ key: 'be66e5ad6a733e0131fb8931ad796e60' });
+        //获取定位信息
+        var myAmapFun = new amapFile.AMapWX({
+            key: 'be66e5ad6a733e0131fb8931ad796e60'
+        });
         myAmapFun.getRegeo({
             success: function(data) {
                 that.setData({
@@ -37,7 +40,51 @@ Page({
             fail: function(info) {
                 console.log(info)
             }
-        })
+        });
+
+        //从localStorage中获取session id
+        wx.getStorage({
+            key: 'PHPSESSID',
+            success: function(res) {
+                if (res.data != '') {
+                    app.globalData.PHPSESSID = res.data;
+                    var userNumber = '';
+                    if (app.globalData.isSigned && !that.data.showInfo) {
+                        that.setData({
+                            showWait: true
+                        })
+                    }
+                    if (!that.data.showInfo) {
+                        //检查用户是否在登录状态
+                        wx.request({
+                            url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
+                            method: "GET",
+                            header: {
+                                'content-Type': 'application/json',
+                                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                                'UA': 'WeChat_SmallProgram'
+                            },
+                            success: function(res) {
+                                console.log(res);
+                                if (res.data.number != null) {
+                                    //已登录
+                                    app.globalData.userNumber = res.data.number;
+                                }
+                            },
+                            error: function(err) {
+                                console.log(err);
+                                wx.showToast({
+                                    title: '网络开小差啦~',
+                                    icon: 'loading',
+                                    duration: 1500,
+                                    mask: false
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+        });
     },
     showMarkerInfo: function(data, i) {
         var that = this;
@@ -126,6 +173,7 @@ Page({
                 header: {
                     'content-Type': 'application/json',
                     'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                    'UA': 'WeChat_SmallProgram'
                 },
                 success: function(res) {
                     wx.showToast({
@@ -159,6 +207,7 @@ Page({
                                         header: {
                                             'content-Type': 'application/json',
                                             'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                                            'UA': 'WeChat_SmallProgram'
                                         },
                                         success: function(sign_info) {
                                             wx.hideToast()
@@ -189,13 +238,13 @@ Page({
                                         },
                                         error: function(sign_err) {
                                             wx.hideToast()
-                                            wx.showModal({
-                                                title: '提示',
-                                                content: '出错啦，再试一次吧！',
-                                                showCancel: 'false',
-                                                success: function() {},
+                                            wx.showToast({
+                                                title: '网络开小差啦~',
+                                                icon: 'loading',
+                                                duration: 1500,
+                                                mask: false
                                             });
-                                            console.log("failed");
+                                            console.log(sign_err);
                                         }
                                     })
                                 } else {
@@ -209,7 +258,13 @@ Page({
                             },
                             error: function(err) {
                                 wx.hideToast()
-                                console.log("failed");
+                                console.log(err);
+                                wx.showToast({
+                                    title: '网络开小差啦~',
+                                    icon: 'loading',
+                                    duration: 1500,
+                                    mask: false
+                                });
                             }
                         });
                     }
@@ -223,7 +278,13 @@ Page({
                     }
                 },
                 error: function(err) {
-                    console.log("failed");
+                    console.log(err);
+                    wx.showToast({
+                        title: '网络开小差啦~',
+                        icon: 'loading',
+                        duration: 1500,
+                        mask: false
+                    });
                 },
             });
         }

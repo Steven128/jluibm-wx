@@ -15,19 +15,19 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         //表单验证规则
         const rules = {
-            number: {
-                required: true,
-                digits: true,
-                rangelength: [8, 8]
-            },
-            password: {
-                required: true,
-            },
-        }
-        // 验证字段的提示信息，若不传则调用默认的信息  
+                number: {
+                    required: true,
+                    digits: true,
+                    rangelength: [8, 8]
+                },
+                password: {
+                    required: true,
+                },
+            }
+            // 验证字段的提示信息，若不传则调用默认的信息  
         const messages = {
             number: {
                 required: '请输入学号',
@@ -44,55 +44,55 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
-    formSubmit: function (e) {
+    formSubmit: function(e) {
         var that = this;
         const params = e.detail.value
-        // 传入表单数据，调用验证方法  
+            // 传入表单数据，调用验证方法  
         if (!Validate.checkForm(e)) {
             const error = Validate.errorList;
             //提示信息  
@@ -106,7 +106,7 @@ Page({
         });
         var formData = e.detail.value;
         var info_Name = formData.name;
-        if (info_Name == null || info_Name == '') { }
+        if (info_Name == null || info_Name == '') {}
         that.data.sure = true;
         var password = 'JLUIBMclub' + e.detail.value.number + e.detail.value.password;
         password = md5.hex_md5(password);
@@ -121,18 +121,16 @@ Page({
             header: {
                 'content-Type': 'application/x-www-form-urlencoded' // 默认值
             },
-            success: function (res) {
+            success: function(res) {
                 if (res.data.message == "wrong passwd") {
                     that.setData({
                         showErrorMsg: '密码输入错误！'
                     })
-                }
-                else if (res.data.message == "does_not_exist") {
+                } else if (res.data.message == "does_not_exist") {
                     that.setData({
                         showErrorMsg: '用户不存在！'
                     })
-                }
-                else if (res.data.message == "success") {
+                } else if (res.data.message == "success") {
                     wx.showToast({
                         title: '登录成功',
                         icon: 'success',
@@ -153,19 +151,18 @@ Page({
                     })
                     wx.navigateBack({
                         url: '/pages/user/user',
-                        success: function (e) {
-                        }
+                        success: function(e) {}
                     });
                 }
                 that.data.submitSuccess = true;
 
             },
-            error: function (err) {
+            error: function(err) {
                 wx.showToast({
-                    title: '咦，出错啦！',
+                    title: '网络开小差啦~',
                     icon: 'loading',
                     duration: 1500,
-                    mask: true
+                    mask: false
                 });
             },
         });
@@ -173,10 +170,10 @@ Page({
     /**
      * 点击 `加入我们` 跳转到该页面
      */
-    joinus: function () {
+    joinus: function() {
         wx.navigateBack({
             url: '/pages/user/user',
-            success: function (e) {
+            success: function(e) {
                 wx.navigateTo({
                     url: '/pages/join/join'
                 })

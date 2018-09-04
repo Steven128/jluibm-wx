@@ -25,125 +25,36 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         var that = this;
-        var myAmapFun = new amapFile.AMapWX({key: 'be66e5ad6a733e0131fb8931ad796e60'});
+        var myAmapFun = new amapFile.AMapWX({ key: 'be66e5ad6a733e0131fb8931ad796e60' });
         myAmapFun.getWeather({
-            success: function (data) {
-                that.setData({weather: data.liveData, showWeather: true})
+            success: function(data) {
+                that.setData({ weather: data.liveData, showWeather: true })
             },
-            fail: function (info) {
+            fail: function(info) {
                 console.log(info)
-            }
-        });
-
-        //从localStorage中获取session id
-        wx.getStorage({
-            key: 'PHPSESSID',
-            success: function (res) {
-                if (res.data != '') {
-                    app.globalData.PHPSESSID = res.data;
-                    var userNumber = '';
-                    if (app.globalData.isSigned && !that.data.showInfo) {
-                        that.setData({showWait: true})
-                    }
-                    if (!that.data.showInfo) {
-                        //检查用户是否在登录状态
-                        wx.request({
-                            url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
-                            method: "GET",
-                            header: {
-                                'content-Type': 'application/json',
-                                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
-                            },
-                            success: function (res) {
-                                if (res.data.number == null) {
-                                    //未登录
-                                    that.setData({showInfo: false});
-                                } else {
-                                    //已登录，这时去获取用户信息
-                                    var getNumber = res.data.number;
-                                    var getName = '';
-                                    var getCollege = '';
-                                    var getMajor = '';
-                                    var getGender = '';
-                                    var getGrade = '';
-                                    wx.request({
-                                        url: 'https://www.jluibm.cn/jluibm-wx/user-info.php?number=' + getNumber,
-                                        method: "GET",
-                                        header: {
-                                            'content-Type': 'application/json',
-                                            'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
-                                        },
-                                        success: function (res) {
-                                            getName = res.data.name;
-                                            getNumber = res.data.number;
-                                            getCollege = res.data.college;
-                                            getMajor = res.data.major;
-                                            getGender = res.data.gender;
-                                            getGrade = res.data.grade;
-                                            if (getGender == "male") {
-                                                getGender = "男";
-                                            } else {
-                                                getGender = "女";
-                                            }
-                                            if (getGrade == 1) {
-                                                getGrade = "大一";
-                                            } else if (getGrade == 2) {
-                                                getGrade = "大二";
-                                            } else if (getGrade == 3) {
-                                                getGrade = "大三";
-                                            } else {
-                                                getGrade = "大四";
-                                            }
-
-                                            that.setData({
-                                                name: getName,
-                                                number: getNumber,
-                                                college: getCollege,
-                                                major: getMajor,
-                                                gender: getGender,
-                                                grade: getGrade,
-                                                showInfo: true,
-                                                userPicPath: 'https://www.jluibm.cn/userPicUpload/' + getNumber + '.png',
-                                                showWait: false
-                                            });
-                                            app.globalData.userNumber = getNumber;
-                                        },
-                                        fail: function (err) {
-                                            console.log(err);
-                                        }
-
-                                    });
-                                }
-                            },
-                            error: function (err) {
-                                console.log(err);
-                            }
-                        });
-                    }
-                }
             }
         });
     },
 
-    userLogin: function () {
-        wx.navigateTo({url: '/pages/signin/signin'});
+    userLogin: function() {
+        wx.navigateTo({ url: '/pages/signin/signin' });
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {},
+    onReady: function() {},
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
         var that = this;
         var userNumber = '';
         if (app.globalData.isSigned && !that.data.showInfo) {
-            that.setData({showWait: true});
+            that.setData({ showWait: true });
         }
         if (!that.data.showInfo) {
             //没显示用户信息的话去检查是否在登录状态
@@ -152,12 +63,13 @@ Page({
                 method: "GET",
                 header: {
                     'content-Type': 'application/json',
-                    'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
+                    'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                    'UA': 'WeChat_SmallProgram'
                 },
-                success: function (res) {
+                success: function(res) {
                     if (res.data.number == null) {
                         //未登录
-                        that.setData({showInfo: false});
+                        that.setData({ showInfo: false });
                     } else {
                         //已登录，去获取个人信息
                         var getNumber = res.data.number;
@@ -171,18 +83,19 @@ Page({
                             method: "GET",
                             header: {
                                 'content-Type': 'application/json',
-                                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
+                                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                                'UA': 'WeChat_SmallProgram'
                             },
-                            success: function (res) {
+                            success: function(res) {
                                 getName = res.data.name;
                                 getNumber = res.data.number;
                                 getCollege = res.data.college;
                                 getMajor = res.data.major;
                                 getGender = res.data.gender;
                                 getGrade = res.data.grade;
-                                if (getGender == "male") {
+                                if (getGender == 0) {
                                     getGender = "男";
-                                } else {
+                                } else if (getGender == 1) {
                                     getGender = "女";
                                 }
                                 if (getGrade == 1) {
@@ -191,7 +104,7 @@ Page({
                                     getGrade = "大二";
                                 } else if (getGrade == 3) {
                                     getGrade = "大三";
-                                } else {
+                                } else if (getGrade == 4) {
                                     getGrade = "大四";
                                 }
 
@@ -208,15 +121,21 @@ Page({
                                 });
                                 app.globalData.userNumber = getNumber;
                             },
-                            fail: function (err) {
+                            fail: function(err) {
                                 console.log(err);
                             }
 
                         });
                     }
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log(err);
+                    wx.showToast({
+                        title: '网络开小差啦~',
+                        icon: 'loading',
+                        duration: 1500,
+                        mask: false
+                    });
                 }
             });
         }
@@ -226,38 +145,39 @@ Page({
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {},
+    onHide: function() {},
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {},
+    onUnload: function() {},
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {},
+    onPullDownRefresh: function() {},
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {},
+    onReachBottom: function() {},
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {},
+    onShareAppMessage: function() {},
 
-    logout: function () {
+    logout: function() {
         var that = this;
         wx.request({
             url: 'https://www.jluibm.cn/jluibm-wx/check_login.php?request=getNumber',
             method: "GET",
             header: {
                 'content-Type': 'application/json',
-                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
+                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                'UA': 'WeChat_SmallProgram'
             },
-            success: function (res) {
+            success: function(res) {
                 if (res.data.number == null) {
                     that.setData({
                         showInfo: false,
@@ -274,7 +194,7 @@ Page({
                         title: '提示',
                         content: '确定要退出登录吗？',
                         showCancel: 'true',
-                        success: function (e) {
+                        success: function(e) {
                             if (e.confirm) {
                                 var getNumber = res.data.number;
                                 var getName = '';
@@ -287,14 +207,15 @@ Page({
                                     method: "GET",
                                     header: {
                                         'content-Type': 'application/json',
-                                        'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
+                                        'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                                        'UA': 'WeChat_SmallProgram'
                                     },
-                                    success: function (res) {
+                                    success: function(res) {
                                         if (res.data.message == "success logout") {
                                             app.globalData.PHPSESSID = '';
                                             app.globalData.userNumber = '';
-                                            wx.setStorage({key: "PHPSESSID", data: ''})
-                                            wx.setStorage({key: "userNumber", data: ''})
+                                            wx.setStorage({ key: "PHPSESSID", data: '' })
+                                            wx.setStorage({ key: "userNumber", data: '' })
                                             that.setData({
                                                 showInfo: false,
                                                 name: '',
@@ -305,30 +226,36 @@ Page({
                                                 grade: '',
                                                 userPicPath: '../../images/user-offline.png'
                                             });
-                                            wx.showToast({title: '退出成功！', icon: 'success', duration: 1500})
+                                            wx.showToast({ title: '退出成功！', icon: 'success', duration: 1500 })
                                         } else {
-                                            wx.showToast({title: '出错啦，再试一次吧', icon: 'loading', duration: 1500})
+                                            wx.showToast({ title: '出错啦，再试一次吧', icon: 'loading', duration: 1500 })
                                         }
                                     },
-                                    fail: function (err) {
+                                    fail: function(err) {
                                         console.log(err);
                                     }
 
                                 });
                             }
                             if (e.cancel) {
-                                wx.showToast({title: '取消成功', icon: 'success', duration: 1500, mask: true})
+                                wx.showToast({ title: '取消成功', icon: 'success', duration: 1500, mask: true })
                             }
                         },
-                        fail: function () {
-                            wx.showToast({title: '取消成功', duration: 1500, mask: true})
+                        fail: function() {
+                            wx.showToast({ title: '取消成功', duration: 1500, mask: true })
                         }
                     })
 
                 }
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
+                wx.showToast({
+                    title: '网络开小差啦~',
+                    icon: 'loading',
+                    duration: 1500,
+                    mask: false
+                });
             }
         });
     },

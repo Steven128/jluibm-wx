@@ -1,17 +1,15 @@
 {
     "pages": [
+        "pages/activities/activities",
         "pages/enroll/enroll",
         "pages/enroll_join/enroll_join",
         "pages/enroll_signin/enroll_signin",
-        "pages/activities/activities",
         "pages/user/user",
         "pages/join/join",
         "pages/password/password",
         "pages/link/link",
         "pages/signin/signin",
         "pages/upload/upload"
-        
-        
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -24,18 +22,17 @@
         "background-color": "#ffffff",
         "selectedColor": "#182b43",
         "borderStyle": "#f5f5f5",
-        "list": [
+        "list": [{
+                "selectedIconPath": "images/activity-active.png",
+                "iconPath": "images/activity.png",
+                "pagePath": "pages/activities/activities",
+                "text": "活动签到"
+            },
             {
                 "selectedIconPath": "images/enroll-active.png",
                 "iconPath": "images/enroll.png",
                 "pagePath": "pages/enroll/enroll",
                 "text": "活动报名"
-            },
-            {
-                "selectedIconPath": "images/activity-active.png",
-                "iconPath": "images/activity.png",
-                "pagePath": "pages/activities/activities",
-                "text": "活动签到"
             },
             {
                 "selectedIconPath": "images/user-active.png",

@@ -142,7 +142,8 @@ Page({
                 method: 'GET',
                 header: {
                     'content-Type': 'application/json',
-                    'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
+                    'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                    'UA': 'WeChat_SmallProgram'
                 },
                 fail: (err) => {
                     console.log(err)
@@ -178,7 +179,8 @@ Page({
 
                             header: {
                                 'content-Type': 'application/json',
-                                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
+                                'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+                                'UA': 'WeChat_SmallProgram'
                             },
 
                             success: function(res) {
@@ -263,7 +265,8 @@ Page({
 
         //         header: {
         //             'content-Type': 'application/json',
-        //             'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID
+        //             'Cookie': 'PHPSESSID=' + app.globalData.PHPSESSID,
+        //             'UA': 'WeChat_SmallProgram'
         //         },
         //         success: function(res) {
 
